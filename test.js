@@ -2,6 +2,7 @@
 
 require('mocha');
 var assert = require('assert');
+var Base = require('base');
 var fragment = require('./');
 
 describe('base-fragment-cache', function() {
@@ -9,20 +10,42 @@ describe('base-fragment-cache', function() {
     assert.equal(typeof fragment, 'function');
   });
 
-  it('should export an object', function() {
-    assert(fragment);
-    assert.equal(typeof fragment, 'object');
+  it('should expose a `fragment` object on the instance', function() {
+    var base = new Base();
+    base.use(fragment());
+
+    assert.equal(typeof base.fragment, 'object');
   });
 
-  it('should throw an error when invalid args are passed', function(cb) {
-    try {
-      fragment();
-      cb(new Error('expected an error'));
-    } catch (err) {
-      assert(err);
-      assert.equal(err.message, 'expected first argument to be a string');
-      assert.equal(err.message, 'expected callback to be a function');
-      cb();
-    }
+  it('should allow property name to be customized', function() {
+    var base = new Base();
+    base.use(fragment({name: 'foo'}));
+
+    assert.equal(typeof base.foo, 'object');
+  });
+
+  it('should create a cache', function() {
+    var base = new Base();
+    base.use(fragment());
+
+    base.fragment.set('foo', 'one', 'two');
+    assert(base.fragment.caches.hasOwnProperty('foo'));
+  });
+
+  it('should set values on cache', function() {
+    var base = new Base();
+    base.use(fragment());
+
+    base.fragment.set('foo', 'one', 'two');
+    assert(base.fragment.caches.hasOwnProperty('foo'));
+    assert(base.fragment.caches.foo.__data__.hasOwnProperty('one'));
+    assert.equal(base.fragment.caches.foo.__data__.one, 'two');
+  });
+
+  it('should get values from a cache', function() {
+    var base = new Base();
+    base.use(fragment());
+    base.fragment.set('foo', 'one', 'two');
+    assert.equal(base.fragment.get('foo', 'one'), 'two');
   });
 });

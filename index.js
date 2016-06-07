@@ -7,16 +7,33 @@
 
 'use strict';
 
-var debug = require('debug')('base-fragment-cache');
+var debug = require('debug')('base:fragment-cache');
+var FragmentCache = require('fragment-cache');
+var isValid = require('is-valid-app');
 
 module.exports = function(config) {
-  return function(app) {
-    if (this.isRegistered('base-fragment-cache')) return;
+  config = config || {};
+
+  var fn = config.types || function(app) {
+    return app.isBase === true;
+  };
+
+  return function pluginFragment(app) {
+    if (!isValid(app, 'base-fragment-cache', fn)) return;
     debug('initializing "%s", from "%s"', __filename, module.parent.id);
 
-    this.define('fragment', function() {
-      debug('running fragment');
-      
+    var prop = config.name || 'fragment';
+    var cache;
+
+    Object.defineProperty(this, prop, {
+      set: function(fragmentCache) {
+        cache = fragmentCache;
+      },
+      get: function() {
+        return cache || (cache = new FragmentCache());
+      }
     });
+
+    return pluginFragment;
   };
 };

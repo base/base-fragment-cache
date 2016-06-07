@@ -1,6 +1,6 @@
 {
   "name": "base-fragment-cache",
-  "description": "Base plugin that adds fragment cache support to your Base application",
+  "description": "Base plugin that adds fragment-cache support to your Base application",
   "version": "0.1.0",
   "homepage": "https://github.com/node-base/base-fragment-cache",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
@@ -19,8 +19,13 @@
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^2.2.0",
+    "fragment-cache": "^0.1.0",
+    "is-valid-app": "^0.1.0"
+  },
   "devDependencies": {
+    "base": "^0.9.0",
     "gulp-format-md": "*",
     "mocha": "^2.5.3"
   },
