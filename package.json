@@ -1,7 +1,7 @@
 {
   "name": "base-fragment-cache",
   "description": "Base plugin that adds fragment-cache support to your Base application",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/node-base/base-fragment-cache",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "node-base/base-fragment-cache",
