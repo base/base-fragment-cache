@@ -26,20 +26,42 @@
   },
   "devDependencies": {
     "base": "^0.9.0",
-    "gulp-format-md": "*",
+    "gulp-format-md": "^0.1.9",
     "mocha": "^2.5.3"
   },
-  "keywords": [],
+  "keywords": [
+    "base",
+    "base-plugin",
+    "cache",
+    "fragment",
+    "fragment-cache",
+    "get",
+    "plugin",
+    "set"
+  ],
   "verb": {
+    "toc": false,
     "layout": "default",
+    "tasks": [
+      "readme"
+    ],
     "plugins": [
       "gulp-format-md"
     ],
     "related": {
-      "list": []
+      "list": [
+        "base",
+        "base-data",
+        "base-option"
+      ]
     },
     "reflinks": [
-      "verb"
-    ]
+      "verb",
+      "base",
+      "fragment-cache"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
